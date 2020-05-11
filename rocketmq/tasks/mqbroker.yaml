@@ -1,0 +1,19 @@
+---
+- name: update conf for mqbroker
+  template:
+    src: "{{ broker_role }}.properties.j2"
+    dest: "{{ appdir }}/conf/{{ data_dir_flag }}.properties"
+    force: true
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Update mqbroker.service
+  template:
+    src: rocketmq-broker.ini.j2
+    dest: "/etc/supervisord.d/rocketmq-{{ data_dir_flag }}.ini"
+    force: true
+    owner: root
+    group: root
+    mode: "0755"
+  notify: update supervisord

@@ -1,0 +1,36 @@
+brokerClusterName={{ cluster_name }}
+brokerName={{ broker_name }}
+brokerId={{ broker_id }}
+deleteWhen=04
+fileReservedTime=48
+brokerRole={{ broker_role }}
+flushDiskType={{ flushDiskType }}
+listenPort={{ listenPort }}
+
+storePathRootDir=/data/rocketmq/store/{{ data_dir_flag }}
+#commitLog存储路径
+storePathCommitLog=/data/rocketmq/store/{{ data_dir_flag }}/commitlog
+#消费队列存储路径
+storePathConsumeQueue=/data/rocketmq/store/{{ data_dir_flag }}/consumequeue
+#消息索引存储路径
+storePathIndex=/data/rocketmq/store/{{ data_dir_flag }}/index
+#checkpoint文件存储路径
+storeCheckpoint=/data/rocketmq/store/{{ data_dir_flag }}/checkpoint
+#abort 文件存储路径
+abortFile=/data/rocketmq/store/{{ data_dir_flag }}/abort
+#Topic持久化文件
+topicConfigPath=/data/rocketmq/store/{{ data_dir_flag }}/config/topics.json
+#ConsumerOffset持久化文件
+consumerOffsetPath=/data/rocketmq/store/{{ data_dir_flag }}/consumerOffset.json
+#subscriptionGroup 持久化文件
+subscriptionGroupPath=/data/rocketmq/store/{{ data_dir_flag }}/config/subscriptionGroup.json
+
+sendMessageThreadPoolNums=48
+pullMessageThreadPoolNums=64
+useReentrantLockWhenPutMessage=TRUE
+waitTimeMillsInSendQueue=3000
+osPageCacheBusyTimeOutMills=5000
+messageDelayLevel=1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h 6h 12h 1d 2d
+
+#transientStorePoolEnable=true
+#transientStorePoolSize=5

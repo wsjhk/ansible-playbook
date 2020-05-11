@@ -1,0 +1,18 @@
+---
+- name: run commons role for all hosts
+  hosts: zookeeper_servers
+  roles:
+    - { role: "commons" }
+  vars_files:
+    - ./zookeeper/vars/main.yaml
+
+- name: run zookeeper role for all hosts
+  hosts: zookeeper_servers
+  remote_user: root
+  roles:
+    - { role: "zookeeper" }
+  vars_files:
+    - ./zookeeper/vars/main.yaml
+  handlers:
+  - name: update supervisord
+    command: "supervisorctl update"

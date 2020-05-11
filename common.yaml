@@ -1,0 +1,6 @@
+---
+- hosts: rocketmq
+  remote_user: root
+ 
+  roles:
+    - commons

@@ -1,0 +1,44 @@
+[rocketmq:children]
+mqnamesrv
+mqbroker
+mqconsole
+
+[mqnamesrv]
+mqnamesrv1 ansible_host=10.200.0.68
+mqnamesrv2 ansible_host=10.200.0.149
+
+[mqbroker]
+broker03-master ansible_host=10.200.0.68 broker_name="broker03" broker_id=0 broker_role=ASYNC_MASTER data_dir_flag=master
+broker01-master ansible_host=10.200.0.13 broker_name="broker01" broker_id=0 broker_role=ASYNC_MASTER data_dir_flag=master
+broker01-slave ansible_host=10.200.0.139 broker_name="broker01" broker_id=1 broker_role=SLAVE listenPort=20911 data_dir_flag=slave-1
+broker02-master ansible_host=10.200.0.135 broker_name="broker02" broker_id=0 broker_role=ASYNC_MASTER data_dir_flag=master
+broker02-slave1 ansible_host=10.200.0.149 broker_name="broker02" broker_id=1 broker_role=SLAVE listenPort=20111 data_dir_flag=slave
+broker02-slave2 ansible_host=10.200.0.139 broker_name="broker02" broker_id=2 broker_role=SLAVE listenPort=20111 data_dir_flag=slave-2
+
+[mqconsole]
+rocketmq-console ansible_host=10.200.0.149
+
+[rocketmq:vars]
+PROJECT_NAME=mqall
+ansible_ssh_user=root
+ansible_ssh_pass=cvte@2020
+
+[mqbroker:vars]
+PROJECT_NAME=mqbroker
+flag=create_mqbroker
+ansible_ssh_user=root
+ansible_ssh_pass=cvte@2020
+cluster_name=rocket-cluster
+flushDiskType=ASYNC_FLUSH
+namesrv=10.200.0.68:9876;10.200.0.149:9876
+
+[mqnamesrv:vars]
+PROJECT_NAME=mqnamesrv
+ansible_ssh_user=root
+ansible_ssh_pass=cvte@2020
+
+[mqconsole:vars]
+PROJECT_NAME=mqconsole
+ansible_ssh_user=root
+ansible_ssh_pass=cvte@2020
+namesrv=10.200.0.68:9876;10.200.0.149:9876

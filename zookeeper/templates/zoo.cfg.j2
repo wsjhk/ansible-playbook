@@ -1,0 +1,19 @@
+tickTime=2000
+initLimit=10
+syncLimit=5
+#并发连接数，默认60
+maxClientCnxns=2000
+#存放内存数据快照目录
+dataDir={{ DataDir }}
+#存放事务日志目录，由于事务日志写入性能严重影响zk性能，因此有条件时尽量将dataDir和dataLogDir分开，dataLogDir使用单独空闲磁盘
+dataLogDir={{ LogDir }}
+clientPort=2181
+
+#快照清理
+
+autopurge.snapRetainCount=5
+autopurge.purgeInterval=5
+
+{{ cluster_nodes }}
+
+{{ groups["node"] | join('\n')}}

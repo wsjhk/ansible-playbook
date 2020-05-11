@@ -1,0 +1,66 @@
+---
+- name: copy sysctl.conf to remote servers
+  template:
+    src: sysctl.conf.j2
+    dest: "/etc/sysctl.conf"
+    force: true
+    owner: root
+    group: root
+    mode: "0644"
+  when: rocket_type == 'mqall'
+
+- name: depressing sysctl.conf
+  shell: chdir=/ sysctl -p
+  ignore_errors: yes
+  when: rocket_type == 'mqall'
+
+- name: copy rocketmq to remote servers
+  unarchive: src=rocketmq-all-4.5.2-bin-release.zip dest=/usr/local copy=yes
+  when: rocket_type == 'mqall'
+
+- name: depressing rocketmq
+  shell: chdir=/usr/local mv rocketmq-all-4.5.2-bin-release rocketmq4.5
+  ignore_errors: yes
+  when: rocket_type == 'mqall'
+
+- name: create a direct
+  file: path={{ logdir }} state=directory mode=0755 owner=rocketmq group=rocketmq
+  ignore_errors: yes
+
+- name: Update mqnamesrv.ini
+  template:
+    src: rocketmq-namesrv.ini.j2
+    dest: "/etc/supervisord.d/rocketmq-namesrv.ini"
+    force: true
+    owner: root
+    group: root
+    mode: "0755"
+  notify: update supervisord
+  when: rocket_type == 'mqnamesrv'
+
+- include: mqbroker.yaml
+  when: rocket_type == 'mqbroker'
+
+- include: mq-console.yaml
+  when: rocket_type == 'mqconsole'
+
+- name: copy topic_migrate.sh to remote servers
+  template:
+    src: topic_migrate.sh.j2
+    dest: "{{ appdir }}/topic_migrate.sh"
+    force: true
+    owner: root
+    group: root
+    mode: "0755"
+  when: rocket_type == 'mqbroker' and (flag) == 'roll_mqbroker' and (data_dir_flag) == 'master'
+
+- name: copy topic_migrate_shell.ini to remote servers
+  template:
+    src: topic_migrate_shell.ini.j2
+    dest: "/etc/supervisord.d/topic_migrate_shell.ini"
+    force: true
+    owner: root
+    group: root
+    mode: "0755"
+  notify: update supervisord
+  when: rocket_type == 'mqbroker' and (flag) == 'roll_mqbroker' and (data_dir_flag) == 'master'

@@ -1,0 +1,11 @@
+[program:rocketmq-namesrv]
+command={{ appdir }}/bin/mqnamesrv
+process_name=%(program_name)s
+logfile_maxbytes=100MB
+logfile_backups=10
+stopasgroup=true
+environment=JAVA_HOME={{ jdkdir }}
+directory={{ appdir }}
+user=rocketmq
+stdout_logfile={{ logdir }}/namesrv_stdout.log
+stderr_logfile={{ logdir }}/namesrv_stderr.log

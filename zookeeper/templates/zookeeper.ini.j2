@@ -1,0 +1,10 @@
+[program:{{ Version }}]
+command={{ BigdataDir }}/{{ Version }}/bin/zkServer.sh start-foreground
+process_name=%(program_name)s
+logfile_maxbytes=100MB
+logfile_backups=10
+environment=JAVA_HOME={{ jdkdir }}
+directory={{ BigdataDir }}/{{ Version }}
+user=rocketmq
+stdout_logfile={{ LogDir }}stdout.log
+stderr_logfile={{ LogDir }}stderr.log

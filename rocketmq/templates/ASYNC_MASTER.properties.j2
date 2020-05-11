@@ -1,0 +1,43 @@
+brokerClusterName={{ cluster_name }}
+brokerName={{ broker_name }}
+brokerId={{ broker_id }}
+#删除文件时间点凌晨4点
+deleteWhen=04
+#文件保留时间,默认48小时
+fileReservedTime=48
+brokerRole={{ broker_role }}
+# 同步刷盘
+flushDiskType={{ flushDiskType }}
+#/是否自动新增topic
+autoCreateTopicEnable=FALSE
+#是否自动新增订阅组
+autoCreateSubscriptionGroup=TRUE
+
+#日志存根路径
+storePathRootDir=/data/rocketmq/store
+#commitLog存储路径
+storePathCommitLog=/data/rocketmq/store/commitlog
+#消费队列存储路径
+storePathConsumeQueue=/data/rocketmq/store/consumequeue
+#消息索引存储路径
+storePathIndex=/data/rocketmq/store/index
+#checkpoint文件存储路径
+storeCheckpoint=/data/rocketmq/store/checkpoint
+#abort 文件存储路径
+abortFile=/data/rocketmq/store/abort
+#Topic持久化文件
+topicConfigPath=/data/rocketmq/store/config/topics.json
+#ConsumerOffset持久化文件
+consumerOffsetPath=/data/rocketmq/store/consumerOffset.json
+#subscriptionGroup 持久化文件
+subscriptionGroupPath=/data/rocketmq/store/config/subscriptionGroup.json
+
+sendMessageThreadPoolNums=48
+pullMessageThreadPoolNums=64
+useReentrantLockWhenPutMessage=TRUE
+waitTimeMillsInSendQueue=3000
+osPageCacheBusyTimeOutMills=5000
+messageDelayLevel=1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h 6h 12h 1d 2d
+
+#transientStorePoolEnable=true
+#transientStorePoolSize=5

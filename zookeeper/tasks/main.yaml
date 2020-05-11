@@ -1,0 +1,22 @@
+---
+- name: mkdir directory for bigdata data
+  file: dest={{ BigdataDir }} mode=0755 state=directory
+
+- name: install zookeeper
+  unarchive: src=../files/{{ Version }}.tar.gz dest={{ BigdataDir }}
+
+- name: install configuration file for zookeeper
+  template: src=../templates/zoo.cfg.j2 dest={{ BigdataDir }}/{{ Version }}/conf/zoo.cfg
+
+- name: create log directory
+  file: dest={{ LogDir }} mode=0755 state=directory owner=rocketmq group=rocketmq
+
+- name: create data directory
+  file: dest={{ DataDir }} mode=0755 state=directory owner=rocketmq group=rocketmq
+
+- name: add myid file
+  shell: echo {{ myid }} > {{ DataDir }}/myid
+
+- name: add zookeeper.ini file to supervisor
+  template: src=../templates/zookeeper.ini.j2 dest=/etc/supervisord.d/zookeeper.ini
+  notify: update supervisord

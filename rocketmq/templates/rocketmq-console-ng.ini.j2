@@ -1,0 +1,11 @@
+[program:rocketmq-console-ng]
+command={{ jdkdir }}/bin/java -jar {{ appdir }}/rocketmq-console-ng-1.0.0.jar --rocketmq.config.namesrvAddr='{{ namesrv }}'
+process_name=%(program_name)s
+logfile_maxbytes=100MB
+logfile_backups=10
+stopasgroup=true
+environment=JAVA_HOME={{ jdkdir }}
+directory={{ appdir }}
+user=rocketmq
+stdout_logfile=/var/log/rocketmq-console/stdout.log
+stderr_logfile=/var/log/rocketmq-console/stderr.log

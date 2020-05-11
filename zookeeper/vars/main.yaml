@@ -1,0 +1,9 @@
+base: /data
+app_base: "{{ base }}/app"
+data_base: "{{ base }}/data"
+log_base: "{{ base }}/log"
+BigdataDir: /usr/local/zookeeper
+DataDir: /usr/local/zookeeper/data
+LogDir: "{{ log_base }}"
+Version: zookeeper-3.4.9
+jdkdir: /usr/local/jdk8

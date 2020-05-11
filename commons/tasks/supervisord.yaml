@@ -1,0 +1,10 @@
+---
+- name: install supervisor
+  yum: name=supervisor state=present
+  tags: install_supervisor
+
+- name: enable supervisord
+  shell: chdir=/ systemctl enable supervisord.service
+
+- name: run supervisord
+  shell: chdir=/ systemctl start supervisord.service

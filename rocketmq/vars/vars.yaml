@@ -1,0 +1,8 @@
+base: /data
+app_base: "{{base}}/app"
+data_base: "{{base}}/data"
+log_base: "{{base}}/log"
+datadir: /data/rocketmq/store
+logdir: /var/log/rocketmq
+appdir: /usr/local/rocketmq4.5
+jdkdir: /usr/local/jdk8

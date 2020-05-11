@@ -1,0 +1,14 @@
+#!/bin/bash
+ 
+for topic in $({{ appdir }}/bin/mqadmin topicList -n "{{ namesrv }}" 2>/dev/null | grep -vE "%RETRY%|%DLQ%|SELF_TEST_TOPIC|OFFSET_MOVED_EVENT|TBW102|BenchmarkTest|rocket-cluster|^$")
+do
+  {{ appdir }}/bin/mqadmin topicRoute -t ${topic} -n "{{ namesrv }}" 2>/dev/null | grep -E "readQueueNums|writeQueueNums|topicSynFlag|perm" | sort | uniq > /tmp/topic.info
+  perm=$(grep perm /tmp/topic.info | awk -F':|,' '{print $2}')
+  read_queue=$(grep readQueueNums /tmp/topic.info | awk -F':|,' '{print $2}')
+  write_queue=$(grep writeQueueNums /tmp/topic.info | awk -F':|,' '{print $2}')
+  echo "${topic} ${read_queue} ${write_queue} ${perm}" >> topic_migrate.log
+  {{ appdir }}/bin/mqadmin updateTopic -t ${topic} -n "{{ namesrv }}" -b {{ ansible_host }}:10911 -r ${read_queue} -w ${write_queue}
+done
+
+rm -f /etc/supervisord.d/topic_migrate_shell.ini
+supervisorctl update

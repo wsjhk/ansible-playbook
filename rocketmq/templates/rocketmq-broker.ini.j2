@@ -1,0 +1,11 @@
+[program:rocketmq-{{ data_dir_flag }}]
+command={{ appdir }}/bin/mqbroker -c {{ appdir }}/conf/{{ data_dir_flag }}.properties -n "{{ namesrv }}"
+process_name=%(program_name)s
+logfile_maxbytes=100MB
+logfile_backups=10
+stopasgroup=true
+environment=JAVA_HOME={{ jdkdir }}
+directory={{ appdir }}
+user=rocketmq
+stdout_logfile={{ logdir }}/broker_stdout.log
+stderr_logfile={{ logdir }}/broker_stderr.log

@@ -1,0 +1,42 @@
+---
+- name: run rocketmq role for all hosts
+  hosts: rocketmq
+  roles:
+    - { role: "commons" }
+  vars_files:
+    - ./rocketmq/vars/vars.yaml
+
+- name: run rocketmq init
+  hosts: rocketmq
+  roles:
+    - { role: "rocketmq", rocket_type: "mqall" }
+
+- name: run mqnamesrv
+  hosts: mqnamesrv
+  roles:
+    - { role: "rocketmq", rocket_type: "mqnamesrv" }
+  vars_files:
+    - ./rocketmq/vars/vars.yaml
+  handlers: 
+  - name: update supervisord
+    command: "supervisorctl update"
+
+- name: run mqbroker
+  hosts: mqbroker
+  roles:
+    - { role: "rocketmq", rocket_type: "mqbroker" }
+  vars_files:
+    - ./rocketmq/vars/vars.yaml
+  handlers: 
+  - name: update supervisord
+    command: "supervisorctl update"
+
+- name: run mqconsole
+  hosts: mqconsole
+  roles:
+    - { role: "rocketmq", rocket_type: "mqconsole" }
+  vars_files:
+    - ./rocketmq/vars/vars.yaml
+  handlers: 
+  - name: update supervisord
+    command: "supervisorctl update"

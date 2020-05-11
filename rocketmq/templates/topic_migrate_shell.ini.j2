@@ -1,0 +1,9 @@
+[program:topic_migrate_shell]
+command={{ appdir }}/topic_migrate.sh
+process_name=%(program_name)s
+stopasgroup=true
+environment=JAVA_HOME={{ jdkdir }},PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+directory={{ appdir }}
+user=root
+stdout_logfile={{ appdir }}/shell_stdout.log
+stderr_logfile={{ appdir }}/shell_stderr.log

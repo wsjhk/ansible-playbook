@@ -1,0 +1,27 @@
+---
+- name: copy jdk to remote servers
+  copy: src=jdk8.zip dest=/usr/local
+
+- name: depressing jdk8
+  unarchive: src=jdk8.zip dest=/usr/local copy=yes
+
+- name: add config to profile
+  shell: /bin/echo {{ item }} >> /etc/profile
+  with_items:
+  - export JAVA_HOME={{ jdkdir }}
+  - export JRE_HOME=\$JAVA_HOME/jre
+  - export CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar:\$JRE_HOME/lib:\$CLASSPATH
+  - export PATH=\$JAVA_HOME/bin:\$PATH
+
+- name: take effect
+  shell: source /etc/profile
+
+- name: test
+  shell: java -version
+  ignore_errors: yes
+
+- name: create a symbolic link for java8
+  file: src={{ jdkdir }}/bin/java path=/usr/bin/java state=link
+
+- name: test java version
+  shell: java -version
