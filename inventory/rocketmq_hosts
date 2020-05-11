@@ -21,13 +21,13 @@ rocketmq-console ansible_host=10.200.0.149
 [rocketmq:vars]
 PROJECT_NAME=mqall
 ansible_ssh_user=root
-ansible_ssh_pass=cvte@2020
+ansible_ssh_pass=xxx@2020
 
 [mqbroker:vars]
 PROJECT_NAME=mqbroker
 flag=create_mqbroker
 ansible_ssh_user=root
-ansible_ssh_pass=cvte@2020
+ansible_ssh_pass=xxx@2020
 cluster_name=rocket-cluster
 flushDiskType=ASYNC_FLUSH
 namesrv=10.200.0.68:9876;10.200.0.149:9876
@@ -35,10 +35,10 @@ namesrv=10.200.0.68:9876;10.200.0.149:9876
 [mqnamesrv:vars]
 PROJECT_NAME=mqnamesrv
 ansible_ssh_user=root
-ansible_ssh_pass=cvte@2020
+ansible_ssh_pass=xxx@2020
 
 [mqconsole:vars]
 PROJECT_NAME=mqconsole
 ansible_ssh_user=root
-ansible_ssh_pass=cvte@2020
+ansible_ssh_pass=xxx@2020
 namesrv=10.200.0.68:9876;10.200.0.149:9876
