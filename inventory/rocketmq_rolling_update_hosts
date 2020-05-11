@@ -8,13 +8,13 @@ broker03-slave ansible_host=10.200.0.13 broker_name="broker03" broker_id=1 broke
 [rocketmq:vars]
 PROJECT_NAME=mqall
 ansible_ssh_user=root
-ansible_ssh_pass=cvte@2020
+ansible_ssh_pass=xxx@2020
 
 [mqbroker:vars]
 PROJECT_NAME=mqbroker
 flag=roll_mqbroker
 ansible_ssh_user=root
-ansible_ssh_pass=cvte@2020
+ansible_ssh_pass=xxx@2020
 cluster_name=rocket-cluster
 flushDiskType=ASYNC_FLUSH
 namesrv=10.200.0.68:9876;10.200.0.149:9876
