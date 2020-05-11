@@ -16,7 +16,7 @@
 >重要说明：hosts主机文件和vars变量文件的修改规则：
 ```
 1）rocketmq_hosts和rocketmq_rolling_update_hosts文件：
-	1.1) mqnamesrv主机组中ansible_host不能有想同的IP，因为一台主机只部署一个namesrv实例。
+	1.1) mqnamesrv主机组中ansible_host不能有相同的IP，因为一台主机只部署一个namesrv实例。
 	1.2) mqbroker主机中主机名可以自定义唯一名称，ansible_host可以是同一IP，但是仅仅限于节点是slave的实例。即：同一台主机只能部署一个master实例，但可以部署多个slave实例。部署多个slave实例时，需要特别注意broker_id，listenPort和data_dir_flag三个变量的设置。broker_id变量需要在同名broker_name中唯一，listenPort和data_dir_flag需要在同ansible_host中唯一。也就是说，当broker_name相同时，broker_id一定不能相同（一主多从的场景）；ansible_host相同时，listenPort和data_dir_flag都一定不能相同。否则会因为冲突导致配置不正常实例无法启动。还有就是namesrv这个变量需要修改为指定的ip或者域名。
 	1.3）扩容时修改rocketmq_rolling_update_hosts文件需要rocketmq_hosts文件对比，不能和rocketmq_hosts文件冲突，规则和以上两点一样。
 
