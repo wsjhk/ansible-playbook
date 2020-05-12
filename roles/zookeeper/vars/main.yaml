@@ -7,3 +7,7 @@ DataDir: /usr/local/zookeeper/data
 LogDir: "{{ log_base }}"
 Version: zookeeper-3.4.9
 jdkdir: /usr/local/jdk8
+# cluster_nodes: |
+#   server.1=10.200.0.68:2888:3888
+#   server.2=10.200.0.13:2888:3888
+#   server.3=10.200.0.135:2888:3888
