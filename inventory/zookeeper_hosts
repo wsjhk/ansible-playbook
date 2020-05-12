@@ -8,3 +8,6 @@ ansible_ssh_user=root
 ansible_ssh_pass=xxx@2020
 
 [node]
+server.1=10.200.0.68:2888:3888
+server.2=10.200.0.13:2888:3888
+server.3=10.200.0.135:2888:3888
