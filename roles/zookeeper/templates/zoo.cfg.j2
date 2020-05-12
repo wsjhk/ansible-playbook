@@ -14,5 +14,5 @@ clientPort=2181
 autopurge.snapRetainCount=5
 autopurge.purgeInterval=5
 
-#{{ cluster_nodes }}
+#集群节点信息，或者可以在vars/main.yaml中定义cluster_nodes变量，然后在这里引用也可以
 {{ groups["node"] | join('\n')}}
